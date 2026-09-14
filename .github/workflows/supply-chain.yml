@@ -47,6 +47,13 @@ jobs:
         run: grype sbom:juiceshop.sbom.json -o sarif > results.sarif
         continue-on-error: true
 
+      # 5A. Upload Grype SARIF report as a downloadable artifact
+      - name: Upload Grype SARIF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-vulnerability-report
+          path: results.sarif
+
       # 6. Upload SARIF results to GitHub Security tab
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
